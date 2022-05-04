@@ -1,0 +1,47 @@
+<html>
+        <style>
+            body{
+                background-color: dimgrey;
+            }
+
+            .center{
+                margin: 0;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            label{
+                margin-left: auto;
+                margin-right: auto;
+                color: whitesmoke;
+            }
+
+        </style>
+    <head>
+        <title>LCD Messenger</title>        
+    </head>
+
+    <body>
+        <div class = "center">
+            <label>Type Text Here:</label>
+            <br>
+            <input type="text" id="sauce" value="SUP SUP!"></input>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"></script>
+        <script>
+            var socket = io();
+            window.addEventListener("load", function () {
+                var sauce = document.getElementById("sauce");
+                sauce.addEventListener("change", function () {
+                    socket.emit("sauce", sauce.value);
+                });
+            });
+
+            window.onbeforeunload = function () {
+                socket.emit("sauce", "Good Bye");
+            }
+        </script>
+    </body>
+
+</html>
